@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+ValueNotifier<int> indexChangeNotifier = ValueNotifier(0);
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.red,
-        backgroundColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'home',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.portable_wifi_off,color: Colors.white38,),
-              label: 'test',
-  
-              backgroundColor: Colors.red),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.portable_wifi_off,color: Colors.white38),
-            label: 'tw',
-            backgroundColor: Colors.red,
-          ),
-        ]);
+    return ValueListenableBuilder(
+      valueListenable: indexChangeNotifier,
+      builder: (context, int newIndex, _) {
+        return BottomNavigationBar(
+            currentIndex: newIndex,
+            onTap: (index) {
+              indexChangeNotifier.value = index;
+            },
+            elevation: 0,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey,
+            backgroundColor: Colors.black,
+            selectedIconTheme: const IconThemeData(color: Colors.white),
+            unselectedIconTheme: const IconThemeData(color: Colors.grey),
+            selectedFontSize: 16,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'home',
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.alarm_sharp,
+                  ),
+                  label: 'test'),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.portable_wifi_off),
+                label: 'tw',
+              ),
+            ]);
+      },
+    );
   }
 }
