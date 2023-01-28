@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:goodfood/core/colors.dart';
-import 'package:goodfood/presentation/main_page/bottom_nav.dart';
+import 'package:goodfood/presentation/components/bottom_nav/bottom_nav.dart';
+import 'package:goodfood/presentation/pages/Main_page/main_page.dart';
 
 
 void main() {
-  runApp(MyWidget());
+  runApp(const MyWidget());
 }
 
 class MyWidget extends StatelessWidget {
@@ -13,13 +12,12 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       title: 'FlutterApp',
       theme: ThemeData(primarySwatch: Colors.red),
-      home: Scaffold(
-        backgroundColor: backGroundColor,
-        bottomNavigationBar: BottomNavBar(),
-      ),
+      home: MainPage()
     );
   }
 }
