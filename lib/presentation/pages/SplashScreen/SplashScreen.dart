@@ -17,10 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 10), () {
-      print("jhelo");
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MainPage()));
+    Future.delayed(Duration(seconds: 7), () {
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => MainPage()));
     });
 
     print('hello');
@@ -29,14 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black45,
         body: Container(
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(
-                  image: AssetImage('assets/images/loadingLogo.png')),
+              Image(image: AssetImage('assets/images/loadingLogo.png')),
               CircularProgressIndicator(),
             ],
           )),
