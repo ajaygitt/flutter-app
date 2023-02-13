@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:goodfood/presentation/pages/Home/HomeScreen.dart';
 import 'package:goodfood/presentation/pages/Leaves/Leaves.dart';
 import 'package:goodfood/presentation/pages/Notification/NotificationScreen.dart';
 import 'package:goodfood/presentation/pages/Profile/ProfileScree.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,49 +13,65 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  Color color = Color(0xff1b263b);
+  String disp = '';
+
   final _pages = [
     const HomeScreen(),
+    const LeaveScreen(),
     const NotificationScreen(),
     const ProfileScreen(),
-    const LeaveScreen()
   ];
   int _currentIndex = 0;
   void onTappingMenu(int index) {
     setState(() {
       _currentIndex = index;
     });
-    print('case${index}');
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff1b263b),
+        title: Text("Impulse "),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: CircleAvatar(
+                radius: 30.0,
+                backgroundColor: Color.fromARGB(255, 73, 73, 73),
+                foregroundColor: Color.fromARGB(255, 114, 114, 114),
+                child: Icon(Icons.account_circle, size: 30.0),
+              ))
+        ],
+      ),
+      backgroundColor: const Color(0xff1b263b),
       body: _pages[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            elevation: 10,
-            currentIndex: _currentIndex,
-            backgroundColor: Colors.black,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.grey,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            iconSize: 28,
-            onTap: ((index) {
-              onTappingMenu(index);
-            }),
-            items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month), label: 'Leaves'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'notification'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'my profile'),
-        ]));
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 50,
+        animationDuration: const Duration(microseconds: 400),
+        backgroundColor: color,
+        items: const [
+          Icon(Icons.home),
+          Icon(Icons.calendar_month),
+          Icon(Icons.notifications),
+        ],
+        onTap: (index) {
+          setState(() {
+                          color = Color(0xff1b263b);
+
+            // if (index == 0) {
+            //   color = Color(0xff1b263b);
+            // } else if (index == 1) {
+            //   color = Colors.blueGrey;
+            // } else {
+            //   color = Colors.blueGrey;
+            // }
+            _currentIndex = index;
+          });
+        },
+      ),
+    );
   }
 }
